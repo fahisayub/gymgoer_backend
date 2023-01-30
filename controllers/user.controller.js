@@ -2,17 +2,18 @@ const { UserModel } = require('../models/user.model');
 const argon = require('argon2');
 const jwt = require('jsonwebtoken');
 
-let registerUser = async (req, res) => {
+const registerUser = async (req, res) => {
     let credentials = req.body;
     let user = await UserModel.findOne({ email: credentials.email });
-
+    
     if (!user) {
+        console.log(credentials);
         try {
 
             const hashpass = await argon.hash(credentials.password, 3);
             credentials.password = hashpass;
-            let newUser = await UserModel.save(credentials);
-            res.send({ msg: `Welcome ${newUser.name},You have registered successfully` })
+            let newUser = await UserModel.insertMany([credentials]);
+            res.send({ msg: `Welcome ${credentials.name},You have registered successfully` })
         } catch (e) {
             res.send({ errmsg: 'Something went wrong!', err: e });
         }
@@ -22,7 +23,7 @@ let registerUser = async (req, res) => {
     }
 }
 
-let userLogin = async (req, res) => {
+const userLogin = async (req, res) => {
     let { email, password } = req.body;
     let user = await UserModel.findOne({ email });
     if (!user) {
@@ -52,5 +53,5 @@ const UserController = {
 }
 
 module.exports = {
-    UserController
+    UserController,
 }

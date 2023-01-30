@@ -1,3 +1,2 @@
-const { describe } = require("mocha");
+let chai= require("chai");
 
-describe('when user is authenticated', ()=>{})

@@ -3,17 +3,17 @@ require('dotenv').config();
 const cors=require('cors');
 const port=process.env.PORT;
 const {connectdb}=require('./config/db.config');
-const { UserRouter }=require('./routes/user.route');
+const { userRouter }=require('./routes/user.route');
 
 const app=express();
 app.use(express.json());
 app.use(cors());
 
 
+app.use('/user',userRouter);
 app.use('/',(req,res)=>{
     res.send('Welcome to GYMGOER');
 });
-app.use('/user',UserRouter);
 
 app.listen(port,async()=>{
     try{
