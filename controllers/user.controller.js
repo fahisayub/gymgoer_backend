@@ -1,6 +1,7 @@
 const { UserModel } = require('../models/user.model');
 const argon = require('argon2');
 const jwt = require('jsonwebtoken');
+const passport = require('../config/googleOauth.config')
 
 const registerUser = async (req, res) => {
     let credentials = req.body;
@@ -48,8 +49,19 @@ const userLogin = async (req, res) => {
     }
 }
 
+const google=passport.authenticate('google', { scope: ['profile', 'email'] })
+
+const googlecallback=passport.authenticate('google', { failureRedirect: '/user/login', session: false });
+const redirect=(req, res) => {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+}
+
+
+
+
 const UserController = {
-    registerUser,userLogin
+    registerUser,userLogin,google,googlecallback,redirect
 }
 
 module.exports = {
