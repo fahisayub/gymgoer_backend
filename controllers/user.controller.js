@@ -49,19 +49,19 @@ const userLogin = async (req, res) => {
     }
 }
 
-const google=passport.authenticate('google', { scope: ['profile', 'email'] })
+// const google=passport.authenticate('google', { scope: ['profile', 'email'] })
 
-const googlecallback=passport.authenticate('google', { failureRedirect: '/user/login', session: false });
-const redirect=(req, res) => {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-}
+// const googlecallback=passport.authenticate('google', { failureRedirect: '/user/login', session: false });
+// const redirect=(req, res) => {
+//     // Successful authentication, redirect home.
+//     res.redirect('/');
+// }
 
 
 
 
 const UserController = {
-    registerUser,userLogin,google,googlecallback,redirect
+    registerUser,userLogin
 }
 
 module.exports = {

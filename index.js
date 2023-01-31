@@ -11,7 +11,7 @@ const { oauthRouter } = require('./routes/oauth.route');
 app.use(express.json());
 app.use(cors());
 
-app.use('/auth',oauthRouter);
+// app.use('/auth',oauthRouter);
 app.use('/user', userRouter);
 
 // app.get('/auth/google',
