@@ -25,17 +25,17 @@ const registerUser = async (req, res) => {
 }
 
 const userLogin = async (req, res) => {
-    let { userid, password, role } = req.body;
-    let user = await UserModel.findOne({ userid });
+    let { userId, password, role } = req.body;
+    let user = await UserModel.findOne({ userId });
     if (!user) {
         res.send({ errmsg: 'Invalid user credentials!', err });
     } else {
         if (role === 'admin') {
             if (user.password === password) {
-                let token = jwt.sign({ userid: user.userid }, process.env.SECRET_KEY, { expiresIn: '1h' })
+                let token = jwt.sign({ userId: user.userId }, process.env.SECRET_KEY, { expiresIn: '1h' })
                 let refreshtoken = jwt.sign({}, process.env.REFRESH_SECRET_KEY, { expiresIn: '7d' })
                 let payload = {
-                    msg: `Welcome ${user.userid}, You have logged in successfully`,
+                    msg: `Welcome ${user.userId}, You have logged in successfully`,
                     token, refreshtoken, role: 'admin'
                 }
                 res.send(payload);
