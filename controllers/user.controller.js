@@ -12,7 +12,7 @@ const registerUser = async (req, res) => {
         try {
 
             const hashpass = await argon.hash(credentials.password, 3);
-          let newuser=  await UserModel.insertMany([{...credentials,password:hashpass}]);
+          let newuser=  await UserModel.create([{...credentials,password:hashpass}]);
           console.log({...credentials,password:hashpass},newuser);
             res.send({ msg: `Welcome ${credentials.name},You have registered successfully` })
         } catch (e) {
