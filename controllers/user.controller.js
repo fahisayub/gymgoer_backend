@@ -12,8 +12,7 @@ const registerUser = async (req, res) => {
         try {
 
             const hashpass = await argon.hash(credentials.password, 3);
-            credentials.password = hashpass;
-            let newUser = await UserModel.insertMany([credentials]);
+            await UserModel.insertMany([{...credentials,password:hashpass}]);
             res.send({ msg: `Welcome ${credentials.name},You have registered successfully` })
         } catch (e) {
             res.send({ errmsg: 'Something went wrong!', err: e });
