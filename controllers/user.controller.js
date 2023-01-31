@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const passport = require('../config/googleOauth.config')
 
 const registerUser = async (req, res) => {
-    let credentials = req.body;
+    const credentials = req.body;
     let user = await UserModel.findOne({ email: credentials.email });
 
     if (!user) {
@@ -12,8 +12,8 @@ const registerUser = async (req, res) => {
         try {
 
             const hashpass = await argon.hash(credentials.password, 3);
-          let newuser=  await UserModel.create([{...credentials,password:hashpass}]);
-          console.log({...credentials,password:hashpass},newuser);
+            await UserModel.create([{...credentials,password:hashpass}]);
+          console.log({...credentials,password:hashpass});
             res.send({ msg: `Welcome ${credentials.name},You have registered successfully` })
         } catch (e) {
             res.send({ errmsg: 'Something went wrong!', err: e });
