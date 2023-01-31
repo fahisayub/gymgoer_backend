@@ -5,6 +5,7 @@ const userSchema= new mongoose.Schema({
     password:{type:String, required:true},
     name:{type:String},
     userid:{type:String},
+    role:{type:String,default:'user'}
 
 },{timestamps:true});
 
