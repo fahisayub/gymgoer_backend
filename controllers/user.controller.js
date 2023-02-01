@@ -2,7 +2,7 @@ const { UserModel } = require('../models/user.model');
 const argon = require('argon2');
 const jwt = require('jsonwebtoken');
 const passport = require('../config/googleOauth.config')
-
+const nanoid=require('nanoid')
 const registerUser = async (req, res) => {
     const credentials = req.body;
     let user = await UserModel.findOne({ email: credentials.email });
@@ -10,9 +10,9 @@ const registerUser = async (req, res) => {
     if (!user) {
         console.log(credentials);
         try {
-
+            let referalCode=nanoid(6)
             const hashpass = await argon.hash(credentials.password, 3);
-            await UserModel.create([{...credentials,password:hashpass}]);
+            await UserModel.create([{...credentials,password:hashpass,referalCode}]);
           console.log({...credentials,password:hashpass});
             res.send({ msg: `Welcome ${credentials.name},You have registered successfully` })
         } catch (e) {
