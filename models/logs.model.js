@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const logSchema= new mongoose.Schema({
-    userName:{type:String,required:true},
     userId:{type:String,required:true},
-    adminId:{type:String,require:true},
+    userUid:{type:String,required:true},
+    adminUid:{type:String,require:true},
     city:{type:String, required:true}
 
 },{timestamps:true});

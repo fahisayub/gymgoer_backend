@@ -6,6 +6,7 @@ const { connectdb } = require('./config/db.config');
 const { userRouter } = require('./routes/user.route');
 const { oauthRouter } = require('./routes/oauth.route');
 const { profileRouter } = require('./routes/profile.route');
+const { logRouter } = require('./routes/logs.route');
 const app = express();
 
 
@@ -15,6 +16,7 @@ app.use(express.json());
 // app.use('/auth',oauthRouter);
 app.use('/user', userRouter);
 app.use('/profile',profileRouter);
+app.use('/entrylogs',logRouter);
 // app.get('/auth/google',
 // );
 
