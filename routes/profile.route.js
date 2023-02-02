@@ -1,16 +1,16 @@
-const {Router} = require('express');
+const { Router } = require('express');
 const { profileController } = require('../controllers/profile.controller');
 const { authorize } = require('../middlewares/authorize.middleware');
 const { authenticate } = require('../middlewares/authenticate.middleware');
 
-const profileRouter=Router();
+const profileRouter = Router();
 
 
-profileRouter.get('/',authenticate,authorize(['user',"admin"]),profileController.getProfile)
-profileRouter.put('/',authenticate,authorize(['user','admin']),profileController.updateProfile)
-profileRouter.get('/userdata/:id',authenticate,authorize(['admin']),profileController.getUserDetails)
+profileRouter.get('/', authenticate, authorize(['user', "admin"]), profileController.getProfile)
+profileRouter.put('/', authenticate, authorize(['user', 'admin']), profileController.updateProfile)
+profileRouter.get('/userdata/:id', authenticate, authorize(['admin']), profileController.getUserDetails)
 
 
-module.exports={
+module.exports = {
     profileRouter,
 }

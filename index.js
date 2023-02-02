@@ -13,18 +13,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// app.use('/auth',oauthRouter);
 app.use('/user', userRouter);
-app.use('/profile',profileRouter);
-app.use('/entrylogs',logRouter);
+app.use('/profile', profileRouter);
+app.use('/entrylogs', logRouter);
+app.use('/', (req, res) => {
+    res.send('Home page');
+});
+// app.use('/auth',oauthRouter);
 // app.get('/auth/google',
 // );
 
 // app.get('/auth/google/callback',
 // );
-app.use('/', (req, res) => {
-    res.send('Home page');
-});
 
 app.listen(port, async () => {
     try {

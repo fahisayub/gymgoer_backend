@@ -1,7 +1,7 @@
 const { UserModel } = require('../models/user.model');
 const argon = require('argon2');
 const jwt = require('jsonwebtoken');
-const {nanoid}=require('nanoid/non-secure')
+const { nanoid } = require('nanoid/non-secure')
 const registerUser = async (req, res) => {
     const credentials = req.body;
     let user = await UserModel.findOne({ email: credentials.email });
@@ -9,10 +9,10 @@ const registerUser = async (req, res) => {
     if (!user) {
         console.log(credentials);
         try {
-            let referalCode=  nanoid(6)
+            let referalCode = nanoid(6)
             const hashpass = await argon.hash(credentials.password, 3);
-            await UserModel.create([{...credentials,password:hashpass,referalCode}]);
-          console.log({...credentials,password:hashpass});
+            await UserModel.create([{ ...credentials, password: hashpass, referalCode }]);
+            console.log({ ...credentials, password: hashpass });
             res.send({ msg: `Welcome ${credentials.name},You have registered successfully` })
         } catch (e) {
             res.send({ errmsg: 'Something went wrong!', err: e });
@@ -31,7 +31,7 @@ const userLogin = async (req, res) => {
     } else {
         if (role === 'admin') {
             if (user.password === password) {
-                let token = jwt.sign({ uid:user._id  }, process.env.SECRET_KEY, { expiresIn: '3h' })
+                let token = jwt.sign({ uid: user._id }, process.env.SECRET_KEY, { expiresIn: '3h' })
                 let refreshtoken = jwt.sign({}, process.env.REFRESH_SECRET_KEY, { expiresIn: '7d' })
                 let payload = {
                     msg: `Welcome ${user.userId}, You have logged in successfully`,
@@ -49,7 +49,7 @@ const userLogin = async (req, res) => {
                 if (!verifyed) {
                     res.send({ msg: 'Invalid user credentials!' });
                 } else {
-                    let token = jwt.sign({uid:user._id }, process.env.SECRET_KEY, { expiresIn: '3h' })
+                    let token = jwt.sign({ uid: user._id }, process.env.SECRET_KEY, { expiresIn: '3h' })
                     let refreshtoken = jwt.sign({}, process.env.REFRESH_SECRET_KEY, { expiresIn: '7d' })
                     let payload = {
                         msg: `Welcome ${user.name}, You have logged in successfully`,

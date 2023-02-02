@@ -46,7 +46,7 @@ const updateProfile = async (req, res) => {
 
 const profileController = {
     getProfile,
-    updateProfile,getUserDetails
+    updateProfile, getUserDetails
 };
 module.exports = {
     profileController,

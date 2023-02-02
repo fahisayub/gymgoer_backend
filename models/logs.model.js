@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
-const logSchema= new mongoose.Schema({
-    userId:{type:String,required:true},
-    userUid:{type:String,required:true},
-    adminUid:{type:String,require:true},
-    city:{type:String, required:true}
+const logSchema = new mongoose.Schema({
+    userId: { type: String, required: true },
+    userUid: { type: String, required: true },
+    adminUid: { type: String, require: true },
+    city: { type: String, required: true }
 
-},{timestamps:true});
+}, { timestamps: true });
 
-const LogModel=mongoose.model('log',logSchema);
+const LogModel = mongoose.model('log', logSchema);
 
-module.exports={
+module.exports = {
     LogModel,
 }
