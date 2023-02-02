@@ -5,7 +5,8 @@ const userSchema= new mongoose.Schema({
     name:{type:String,required:true},
     userId:{type:String,required:true},
     referalCode:{type:String, required:true},
-    role:{type:String,default:'user'}
+    role:{type:String,default:'user'},
+    city:{type:String, default:''}
 
 },{timestamps:true});
 

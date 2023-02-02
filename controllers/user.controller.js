@@ -49,7 +49,7 @@ const userLogin = async (req, res) => {
                 if (!verifyed) {
                     res.send({ msg: 'Invalid user credentials!' });
                 } else {
-                    let token = jwt.sign({ email: user.email }, process.env.SECRET_KEY, { expiresIn: '1h' })
+                    let token = jwt.sign({uid:user._id }, process.env.SECRET_KEY, { expiresIn: '3h' })
                     let refreshtoken = jwt.sign({}, process.env.REFRESH_SECRET_KEY, { expiresIn: '7d' })
                     let payload = {
                         msg: `Welcome ${user.name}, You have logged in successfully`,
