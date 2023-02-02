@@ -7,7 +7,7 @@ const authenticate= async (req, res,next) => {
         res.send({"msg":"User not authenticated, Please Login"});
     }else{
         // if token is present 
-        const decode=jwt.verify(token,process.env.SECRET_KEY);
+        const decode= jwt.verify(token,process.env.SECRET_KEY);
         if(decode){
             console.log(decode)
             req.body.uid=decode.uid;
