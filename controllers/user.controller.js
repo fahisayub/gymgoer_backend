@@ -31,7 +31,7 @@ const userLogin = async (req, res) => {
     } else {
         if (role === 'admin') {
             if (user.password === password) {
-                let token = jwt.sign({ userId: user.userId }, process.env.SECRET_KEY, { expiresIn: '1h' })
+                let token = jwt.sign({ uid:user._id  }, process.env.SECRET_KEY, { expiresIn: '3h' })
                 let refreshtoken = jwt.sign({}, process.env.REFRESH_SECRET_KEY, { expiresIn: '7d' })
                 let payload = {
                     msg: `Welcome ${user.userId}, You have logged in successfully`,

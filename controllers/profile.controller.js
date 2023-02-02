@@ -5,45 +5,50 @@ const { UserModel } = require("../models/user.model");
 
 
 
-const getUserProfile = async (req, res) => {
-  let { id } = req.params;
-  let {role}=req.body;
-  try {
-    if(role=='user'){
+const getProfile = async (req, res) => {
+    let { id } = req.params;
+    try {
 
         let user = await UserModel.findOne({ _id: id });
-        res.send({  user });
-    }else if(role=='admin'){
-        let user = await UserModel.findOne({ referalCode: id });
-        res.send({  user });
+        res.send({ user });
 
+    } catch (err) {
+        res.send({ msg: "Something went wrong", error: err });
     }
-  } catch (err) {
-    res.send({ msg: "Something went wrong", error: err });
-  }
+};
+const getUserDetails = async (req, res) => {
+    let referalCode = req.params.id;
+    try {
+
+        let user = await UserModel.findOne({ referalCode });
+        res.send({ user });
+
+    } catch (err) {
+        res.send({ msg: "Something went wrong", error: err });
+    }
 };
 
 const updateProfile = async (req, res) => {
-  let { id } = req.params;
-  try {
-    let update = req.body;
-    let updatedstatus = await UserModel.updateOne(
-      { _id: id },
-      { ...update }
-    );
-    res.send({ msg: "item updated successfully", updatedstatus });
-  } catch (err) {
-    res.send({ msg: "Something went wrong", error: err });
-  }
+    let { id } = req.params;
+    try {
+        let update = req.body;
+        let updatedstatus = await UserModel.updateOne(
+            { _id: id },
+            { ...update }
+        );
+        res.send({ msg: "item updated successfully", updatedstatus });
+    } catch (err) {
+        res.send({ msg: "Something went wrong", error: err });
+    }
 };
 
 
 
 const profileController = {
-  getUserProfile,
-  updateProfile,
+    getProfile,
+    updateProfile,getUserDetails
 };
 module.exports = {
-  profileController,
+    profileController,
 };
 

@@ -11,7 +11,6 @@ console.log(uid);
         let role=user.role;
         console.log(role)
         if (roles.includes(role)) {
-          req.body.role=role;
           next();
         } else {
           res.send({'msg':"Access Denied"});
