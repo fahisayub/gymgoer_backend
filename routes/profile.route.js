@@ -6,8 +6,8 @@ const { authenticate } = require('../middlewares/authenticate.middleware');
 const profileRouter=Router();
 
 
-profileRouter.get('/:id',authenticate,authorize(['user',"admin"]),profileController.getProfile)
-profileRouter.put('/:id',authenticate,authorize(['user','admin']),profileController.updateProfile)
+profileRouter.get('/',authenticate,authorize(['user',"admin"]),profileController.getProfile)
+profileRouter.put('/',authenticate,authorize(['user','admin']),profileController.updateProfile)
 profileRouter.get('/userdata/:id',authenticate,authorize(['admin']),profileController.getUserDetails)
 
 

@@ -6,10 +6,10 @@ const { UserModel } = require("../models/user.model");
 
 
 const getProfile = async (req, res) => {
-    let { id } = req.params;
+    let { uid } = req.body;
     try {
 
-        let user = await UserModel.findOne({ _id: id });
+        let user = await UserModel.findOne({ _id: uid });
         res.send({ user });
 
     } catch (err) {
@@ -29,11 +29,11 @@ const getUserDetails = async (req, res) => {
 };
 
 const updateProfile = async (req, res) => {
-    let { id } = req.params;
+    let { uid } = req.body;
     try {
         let update = req.body;
         let updatedstatus = await UserModel.updateOne(
-            { _id: id },
+            { _id: uid },
             { ...update }
         );
         res.send({ msg: "item updated successfully", updatedstatus });
